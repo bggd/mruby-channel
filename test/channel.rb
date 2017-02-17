@@ -29,7 +29,6 @@ assert 'Routine with Channel' do
   chan = Channel.get 'foo'
 
   thread = Routine.new("
-    done = Channel.get 'done'
     chan = Channel.get 'foo'
     chan.send([1, 'a', :b, true, nil])
     chan.send({ :abc => 123 })

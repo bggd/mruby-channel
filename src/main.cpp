@@ -230,6 +230,8 @@ chan_close(mrb_state* mrb, mrb_value self)
   return mrb_nil_value();
 }
 
+MRB_BEGIN_DECL
+
 void
 mrb_mruby_channel_gem_init(mrb_state* mrb)
 {
@@ -258,3 +260,5 @@ void
 mrb_mruby_channel_gem_final(mrb_state* mrb)
 {
 }
+
+MRB_END_DECL

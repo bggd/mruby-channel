@@ -12,7 +12,7 @@ Channel* Channel::get_channel(const std::string& name)
     return it->second;
   }
 
-  auto chan = new Channel();
+  Channel* chan = new Channel();
   chan->name = name;
   Channel::named_channels[name] = chan;
   chan->add_ref();
@@ -25,7 +25,7 @@ Channel::Channel() : refcount(0), is_close(false)
 
 Channel::~Channel()
 {
-  std::unique_lock<std::mutex> lk(this->named_channels_mtx);
+  std::lock_guard<std::mutex> lk(this->named_channels_mtx);
   Channel::named_channels.erase(name);
 }
 

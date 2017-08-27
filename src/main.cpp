@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <thread>
 #include <mutex>
 #include <condition_variable>
 #include <queue>
@@ -67,7 +68,7 @@ static mrb_value
 routine_init(mrb_state* mrb, mrb_value self)
 {
   char* script;
-  
+
   mrb_get_args(mrb, "z", &script);
 
   struct RClass* cls = mrb_class_get(mrb, "Routine");
@@ -244,7 +245,7 @@ mrb_mruby_channel_gem_init(mrb_state* mrb)
   mrb_define_method(mrb, cls, "get_error", routine_get_error, MRB_ARGS_NONE());
   mrb_define_method(mrb, cls, "join", routine_join, MRB_ARGS_NONE());
   mrb_define_method(mrb, cls, "running?", routine_is_running, MRB_ARGS_NONE());
-  
+
   cls = mrb_define_class(mrb, "Channel", mrb->object_class);
 
   mrb_define_class_method(mrb, cls, "get", chan_get, MRB_ARGS_REQ(1));

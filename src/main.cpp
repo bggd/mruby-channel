@@ -71,7 +71,6 @@ routine_init(mrb_state* mrb, mrb_value self)
 
   mrb_get_args(mrb, "z", &script);
 
-  struct RClass* cls = mrb_class_get(mrb, "Routine");
   Routine* r = (Routine*)mrb_malloc(mrb, sizeof(Routine));
   r = new (r) Routine(script);
 

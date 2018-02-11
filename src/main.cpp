@@ -4,6 +4,7 @@
 #include <mruby/hash.h>
 #include <mruby/compile.h>
 #include <mruby/string.h>
+#include <mruby/class.h>
 
 #include <atomic>
 #include <string>
@@ -238,6 +239,7 @@ mrb_mruby_channel_gem_init(mrb_state* mrb)
   struct RClass* cls;
 
   cls = mrb_define_class(mrb, "Routine", mrb->object_class);
+  MRB_SET_INSTANCE_TT(cls, MRB_TT_DATA);
 
   mrb_define_method(mrb, cls, "initialize", routine_init, MRB_ARGS_REQ(1));
   mrb_define_method(mrb, cls, "start", routine_start, MRB_ARGS_NONE());
@@ -246,6 +248,7 @@ mrb_mruby_channel_gem_init(mrb_state* mrb)
   mrb_define_method(mrb, cls, "running?", routine_is_running, MRB_ARGS_NONE());
 
   cls = mrb_define_class(mrb, "Channel", mrb->object_class);
+  MRB_SET_INSTANCE_TT(cls, MRB_TT_DATA);
 
   mrb_define_class_method(mrb, cls, "get", chan_get, MRB_ARGS_REQ(1));
 

@@ -146,9 +146,14 @@ void Variant::free()
       delete[] this->data.str;
       break;
     case Variant::Type::ARRAY:
+      for (auto& v : *this->data.ary) { v.free(); }
       delete this->data.ary;
       break;
     case Variant::Type::HASH:
+      for (auto& v : *this->data.tbl) {
+        v.first.free();
+        v.second.free();
+      }
       delete this->data.tbl;
       break;
     default: break;

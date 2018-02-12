@@ -38,6 +38,10 @@ void Channel::release()
 {
   if (this->refcount.fetch_sub(1, std::memory_order_release) == 1) {
     std::atomic_thread_fence(std::memory_order_acquire);
+    while (!queue.empty()) {
+      queue.front().free();
+      queue.pop();
+    }
     delete this;
   }
 }
